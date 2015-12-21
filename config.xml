@@ -36,7 +36,7 @@
     <preference name="phonegap-version" value="cli-5.2.0" />
     <preference name="orientation"      value="default" />
     <preference name="target-device"    value="universal" />
-    <preference name="fullscreen"       value="false" />
+    <preference name="fullscreen"       value="true" />
     <preference name="stay-in-webview"  value="false" />
     <preference name="webviewbounce"    value="false" />
     <preference name="prerendered-icon" value="true" />
@@ -137,6 +137,7 @@
         <uses-permission android:name="android.permission.READ_CONTACTS" />
         <uses-permission android:name="android.permission.GET_ACCOUNTS" />
         <uses-permission android:name="android.permission.VIBRATE"/>
+		<uses-permission android:name="android.permission.INTERNET"/>
     </gap:config-file>
 
     <gap:config-file platform="ios" parent="CFBundleDocumentTypes" mode="add">
