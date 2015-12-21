@@ -25,6 +25,7 @@ angular.module('mm.core.login')
         $ionicModal, $mmLoginHelper) {
 
     $scope.siteurl = 'http://104.155.40.71/';
+    
     $scope.isInvalidUrl = true;
 
     $scope.validate = function(url) {

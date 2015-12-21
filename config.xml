@@ -22,9 +22,11 @@
     <gap:platform name="ios" />
     <gap:platform name="android" />
 
-    <access origin="*" />
-    <access origin="*.vimeo.com" />
-    <access origin="*.vimeocdn.com" />
+    <access origin="http://127.0.0.1*"/>
+	<access origin="http://player.vimeo.com*"/>
+	<access origin="http://*.vimeocdn.com*" />
+	<access origin="http://*.vimeo.com*" />
+	<access origin="http://vimeo.com*" />
     <access origin="tel:*" launch-external="yes" />
     <access origin="mailto:*" launch-external="yes" />
     <access origin="geo:*" launch-external="yes" />

@@ -24,8 +24,9 @@ angular.module('mm.core.login')
 .controller('mmLoginCredentialsCtrl', function($scope, $state, $stateParams, $mmSitesManager, $mmUtil, $ionicHistory, $mmApp) {
 
     $scope.siteurl = $stateParams.siteurl;
+    
     $scope.credentials = {};
-
+    
     $scope.login = function() {
 
         $mmApp.closeKeyboard();
@@ -62,5 +63,5 @@ angular.module('mm.core.login')
             $mmUtil.showErrorModal(error);
         });
     };
-
+    
 });
