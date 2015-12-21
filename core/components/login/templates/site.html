@@ -17,7 +17,6 @@
                     <input type="url" placeholder="moodle.org" ng-model="siteurl" mm-no-input-validation ng-change="validate(siteurl)" mm-auto-focus >
                 </label>
 				
-
                 <div class="item">
                     <button class="button button-block" ng-click="connect(siteurl)" ng-init="connect('http://104.155.40.71/')" ng-disabled="isInvalidUrl">{{ 'mm.login.connect' | translate }}</button>
                     <!-- <input type="submit" class="button button-block" value="{{ 'mm.login.connect' | translate }}" > -->
