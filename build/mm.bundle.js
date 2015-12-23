@@ -4761,15 +4761,15 @@ angular.module('mm.core')
                     $http.get("https://vimeo.com/api/oembed.json?url="+src).then(function(response) {
                         
                         var link = "http://104.155.40.71/ver-video.php?video="+response.data.video_id;
-                        var system = '_blank';
-                        var location = 'location=no';
+                        var system = '_system';
+                        var location = 'location=yes';
                         
                         var htmTeste ="";                        
-                        htmTeste+= "<a href='#' style='float: left; width: 100%; text-align: center;' ";
+                        htmTeste+= '<a href="#" style="float: left; width: 100%; text-align: center;" ';
                         htmTeste+=   'onclick="';
                         htmTeste+=   "window.open('"+link+"', '"+system+"', '"+location+"'); return false;";
                         htmTeste+=   '" >';
-                        htmTeste+= "<img src='"+response.data.thumbnail_url+"' style= width: 360px; height: auto;' />";
+                        htmTeste+= "<img src='"+response.data.thumbnail_url+"' style= width: 100%; height: auto; max-width:450px;' />";
                         htmTeste+="</a>";
                         htmTeste+="<p style='float: left; width: 100%; font-size: 16px; text-align: center; font-weight: bold;'>Clique na imagem para ver o vídeo</p>";
                         
