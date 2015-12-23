@@ -42,6 +42,7 @@ angular.module('mm.addons.mod_page')
             // Mark download as failed but go on since the main files could have been downloaded.
             downloadFailed = true;
         }).then(function() {
+            
             return $mmaModPage.getPageHtml(module.contents, module.id).then(function(content) {
                 $scope.content = content;
 

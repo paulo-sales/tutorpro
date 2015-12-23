@@ -187,6 +187,13 @@ angular.module('mm.addons.mod_page')
                             img.setAttribute('src', src);
                         }
                     });
+                    angular.forEach(html.find('iframe'), function(iframe) {
+                        var src = paths[decodeURIComponent(iframe.getAttribute('src'))];
+                        if (typeof src !== 'undefined') {
+                            iframe.setAttribute('src', src);
+                            $log.debug("Aqui "+iframe);
+                        }
+                    });
                     // We do the same for links.
                     angular.forEach(html.find('a'), function(anchor) {
                         var href = paths[decodeURIComponent(anchor.getAttribute('href'))];
@@ -194,6 +201,7 @@ angular.module('mm.addons.mod_page')
                             anchor.setAttribute('href', href);
                         }
                     });
+                    
                     return html.html();
                 }
             });

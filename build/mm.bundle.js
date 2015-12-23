@@ -4618,7 +4618,7 @@ angular.module('mm.core')
 }]);
 
 angular.module('mm.core')
-.directive('mmFormatText', ["$interpolate", "$mmText", "$compile", "$translate", "$state", function($interpolate, $mmText, $compile, $translate, $state) {
+.directive('mmFormatText', ["$interpolate", "$mmText", "$http", "$compile", "$translate", "$state", function($interpolate, $mmText, $http, $compile, $translate, $state) {
     var extractVariableRegex = new RegExp('{{([^|]+)(|.*)?}}', 'i'),
         tagsToIgnore = ['AUDIO', 'VIDEO', 'BUTTON', 'INPUT', 'SELECT', 'TEXTAREA', 'A'];
         function calculateShorten(element, shorten) {
@@ -4744,12 +4744,68 @@ angular.module('mm.core')
                                     '" aria-label="' + label + '"><i class="icon ion-ios-search-strong"></i></a>');
                 }
             });
+            
             angular.forEach(dom.find('audio'), addMediaAdaptClass);
             angular.forEach(dom.find('video'), addMediaAdaptClass);
-            angular.forEach(dom.find('iframe'), addMediaAdaptClass);
+            //angular.forEach(dom.find('iframe'), addMediaAdaptClass);
+            
+            angular.forEach(dom.find('iframe'), function(iframe) {
+                //addMediaAdaptClass(iframe);
+                var src = iframe.getAttribute('src');
+                if (typeof src !== 'undefined') {                    
+                    iframe.setAttribute('src', src);
+                    var idVideo = src;
+                    
+                    //var data = getVimeo("https://vimeo.com/api/oembed.json?url="+src);
+                    
+                    $http.get("https://vimeo.com/api/oembed.json?url="+src).then(function(response) {
+                        
+                        var link = "http://104.155.40.71/ver-video.php?video="+response.data.video_id;
+                        var system = '_system';
+                        var location = 'location=yes';
+                        
+                        var htmTeste ="";                        
+                        htmTeste+= "<a href='#' style='float: left; width: 100%; text-align: center;' ";
+                        htmTeste+=   'onclick="window.open('+link+', '+system+', '+location+'); return false;" >';
+                        htmTeste+= "<img src='"+response.data.thumbnail_url+"' style= width: 100%; height: auto; max-width:"+response.data.thumbnail_width+"px;' />";
+                        htmTeste+="</a>";
+                        htmTeste+="<p style='float: left; width: 100%; font-size: 16px; text-align: center; font-weight: bold;'>Clique na imagem para ver o vídeo</p>";
+                        
+                        //pageArticle
+                        
+                        var article = document.getElementById("pageArticle");
+                        var articleDom = angular.element(article);
+                        articleDom.append(htmTeste);
+                        
+                        console.log(response.data);
+                    });
+                    iframe.style.display = 'none';
+                    /*
+                     * 
+                        var htmTeste ="";
+                        htmTeste+= "<a href='http://104.155.40.71/ver-video.php?video="+response.data.video_id+"'><img src='"+response.data.thumbnail_url+"' /></a>";
+                        htmTeste+="<p>Clique na imagem para ver o vídeo</p>";
+                        var input = angular.element(htmTeste);
+                        // Compile the HTML and assign to scope
+                        var compile = $compile(input)(scope);
+                        Elem = angular.element(iframe);
+                        iframe.style.display = 'none';
+                        Elem.after(compile);
+                     */
+                    
+                    //jqImg = angular.element(iframe),
+                    //iframeSrc = $mmText.escapeHTML(iframe.getAttribute('src'));
+                    
+                    //jqImg.after(htmTeste);                    
+                    //$log.debug(iframe);
+                }
+            });
+            
+            //angular.forEach(dom.find('iframe'), addMediaAdaptClass);
             return dom.html();
         });
     }
+    
         function renderText(scope, element, text, afterRender) {
         element.html(text);
         element.removeClass('hide');
@@ -4778,6 +4834,7 @@ angular.module('mm.core')
         }
     };
 }]);
+
 
 angular.module('mm.core')
 .directive('mmIframe', ["$mmUtil", function($mmUtil) {
@@ -6999,10 +7056,10 @@ angular.module('mm.core.login')
                 $mmConfig.delete(mmLoginLaunchPassport);
                 var signature = md5.createHash(launchSiteURL + passport);
                 if (signature != params[0]) {
-                    if (launchSiteURL.indexOf("https://") != -1) {
-                        launchSiteURL = launchSiteURL.replace("https://", "http://");
+                    if (launchSiteURL.indexOf("http://") != -1) {
+                        launchSiteURL = launchSiteURL.replace("http://", "http://");
                     } else {
-                        launchSiteURL = launchSiteURL.replace("http://", "https://");
+                        launchSiteURL = launchSiteURL.replace("http://", "http://");
                     }
                     signature = md5.createHash(launchSiteURL + passport);
                 }
