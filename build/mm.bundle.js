@@ -4764,14 +4764,30 @@ angular.module('mm.core')
                         var system = '_system';
                         var location = 'location=yes';
                         
-                        var htmTeste ="";                        
-                        htmTeste+= '<a href="#" style="float: left; width: 100%; text-align: center;" ';
+                        var htmTeste ='<div class="list card">';
+                        htmTeste+='<div class="item item-avatar">';                        
+                        htmTeste+='<h2 onclick="';
+                        htmTeste+=   "window.open('"+link+"', '"+system+"', '"+location+"'); return false;";
+                        htmTeste+=   '" >';
+                        htmTeste+= response.data.title+'</h2>';
+                        htmTeste+='<p>'+response.data.author_name+'</p>';
+                        htmTeste+='</div>';
+                        
+                        htmTeste+='<div class="item item-image">';                        
+                        htmTeste+='<img src="'+response.data.thumbnail_url+'" ';
+                        htmTeste+= 'onclick="';
+                        htmTeste+=   "window.open('"+link+"', '"+system+"', '"+location+"'); return false;";
+                        htmTeste+=   '" >';
+                        htmTeste+="</a>";
+                        htmTeste+='</div>';
+                        
+                        htmTeste+= '<a class="item item-icon-left assertive"';
                         htmTeste+=   'onclick="';
                         htmTeste+=   "window.open('"+link+"', '"+system+"', '"+location+"'); return false;";
                         htmTeste+=   '" >';
-                        htmTeste+= "<img src='"+response.data.thumbnail_url+"' style= width: 100%; height: auto; max-width:450px;' />";
+                        htmTeste+= '<i class="icon ion-play"></i>Visualizar vídeo';
                         htmTeste+="</a>";
-                        htmTeste+="<p style='float: left; width: 100%; font-size: 16px; text-align: center; font-weight: bold;'>Clique na imagem para ver o vídeo</p>";
+                        htmTeste+="</div>";
                         
                         //pageArticle
                         
