@@ -4766,7 +4766,9 @@ angular.module('mm.core')
                         
                         var htmTeste ="";                        
                         htmTeste+= "<a href='#' style='float: left; width: 100%; text-align: center;' ";
-                        htmTeste+=   'onclick="window.open('+link+', '+system+', '+location+'); return false;" >';
+                        htmTeste+=   'onclick="';
+                        htmTeste+=   "window.open('"+link+"', '"+system+"', '"+location+"'); return false;";
+                        htmTeste+=   '" >';
                         htmTeste+= "<img src='"+response.data.thumbnail_url+"' style= width: 100%; height: auto; max-width:"+response.data.thumbnail_width+"px;' />";
                         htmTeste+="</a>";
                         htmTeste+="<p style='float: left; width: 100%; font-size: 16px; text-align: center; font-weight: bold;'>Clique na imagem para ver o vídeo</p>";
